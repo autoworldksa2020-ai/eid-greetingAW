@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>معايدة العيد - AutoWorld</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>معايدة العيد</h1>
+      <p>اكتب اسمك واضغط “تحميل الصورة”.</p>
+    </header>
+
+    <section class="stage">
+      <!-- The exact 1080x1350 output area -->
+      <div id="card" class="card" aria-label="بطاقة المعايدة">
+        <!-- Background image -->
+        <img class="bg" src="template.jpg" alt="تصميم المعايدة" />
+        <!-- Name overlay -->
+        <div id="nameText" class="name" aria-label="الاسم على التصميم">اسمك هنا</div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <label class="field">
+        <span>الاسم</span>
+        <input id="nameInput" type="text" inputmode="text" placeholder="اكتب اسمك" maxlength="32" />
+      </label>
+
+      <label class="field">
+        <span>المكان</span>
+        <select id="posSelect">
+          <option value="bottom">أسفل</option>
+          <option value="center">وسط</option>
+          <option value="top">أعلى</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>الخط</span>
+        <select id="fontSelect">
+          <option value="cairo">Cairo</option>
+          <option value="tajawal">Tajawal</option>
+          <option value="ibmplex">IBM Plex Sans Arabic</option>
+        </select>
+      </label>
+
+      <button id="downloadBtn" class="btn">تحميل الصورة (1080×1350)</button>
+      <p class="hint">ملاحظة: إذا جوالك قديم، افتحها من كمبيوتر عشان التحميل يكون أسرع.</p>
+    </section>
+  </main>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=Tajawal:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- html-to-image (small, reliable for static cards) -->
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
