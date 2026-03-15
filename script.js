@@ -2,18 +2,30 @@ const nameInput = document.getElementById('nameInput');
 const nameText  = document.getElementById('nameText');
 const downloadBtn = document.getElementById('downloadBtn');
 const posSelect = document.getElementById('posSelect');
-const fontSelect = document.getElementById('fontSelect');
+const colorSelect = document.getElementById('colorSelect');
+const sizeSelect = document.getElementById('sizeSelect');
 const card = document.getElementById('card');
 
 function applyName(){
   const v = (nameInput.value || '').trim();
   nameText.textContent = v ? v : 'اسمك هنا';
+
+  // اختيار الخط حسب اللغة
+  const isArabic = /[\u0600-\u06FF]/.test(v);
+  if(isArabic){
+    nameText.style.fontFamily = '"FFShamelFamily", sans-serif';
+  }else{
+    nameText.style.fontFamily = '"Co Headline W01", sans-serif';
+  }
 }
 
 function applyPos(){
   const v = posSelect.value;
+
   nameText.style.top = '';
   nameText.style.bottom = '';
+  nameText.style.transform = '';
+
   if(v === 'top'){
     nameText.style.top = '6%';
   }else if(v === 'center'){
@@ -21,28 +33,34 @@ function applyPos(){
     nameText.style.transform = 'translateY(-50%)';
   }else{
     nameText.style.bottom = '6%';
-    nameText.style.transform = '';
   }
 }
 
-function applyFont(){
-  const v = fontSelect.value;
-  if(v === 'tajawal') nameText.style.fontFamily = '"Tajawal", system-ui, sans-serif';
-  else if(v === 'ibmplex') nameText.style.fontFamily = '"IBM Plex Sans Arabic", system-ui, sans-serif';
-  else nameText.style.fontFamily = '"Cairo", system-ui, sans-serif';
+function applyColor(){
+  const v = colorSelect.value;
+  nameText.style.color = v;
+}
+
+function applySize(){
+  const v = sizeSelect.value;
+  nameText.style.fontSize = v + 'px';
 }
 
 nameInput.addEventListener('input', applyName);
 posSelect.addEventListener('change', applyPos);
-fontSelect.addEventListener('change', applyFont);
+colorSelect.addEventListener('change', applyColor);
+sizeSelect.addEventListener('change', applySize);
 
-applyName(); applyPos(); applyFont();
+applyName();
+applyPos();
+applyColor();
+applySize();
 
 downloadBtn.addEventListener('click', async () => {
+
   downloadBtn.disabled = true;
   downloadBtn.textContent = 'جاري التحضير...';
 
-  // Render at full Instagram resolution
   const dataUrl = await htmlToImage.toPng(card, {
     cacheBust: true,
     pixelRatio: 1080 / card.getBoundingClientRect().width,
@@ -55,5 +73,5 @@ downloadBtn.addEventListener('click', async () => {
   a.click();
 
   downloadBtn.disabled = false;
-  downloadBtn.textContent = 'تحميل الصورة (1080×1350)';
+  downloadBtn.textContent = 'تحميل الصورة';
 });
